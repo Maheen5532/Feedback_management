@@ -20,13 +20,16 @@ function AdminLogin({ onLogin }) {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-      });
+      const response = await fetch(
+        "https://feedback-server-seven.vercel.app/admin/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(credentials),
+        }
+      );
 
       const data = await response.json();
 
@@ -55,7 +58,7 @@ function AdminLogin({ onLogin }) {
               value={credentials.username}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="admin"
+              placeholder="admin@school.com"
             />
           </div>
 
@@ -70,7 +73,7 @@ function AdminLogin({ onLogin }) {
               onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="admin@123"
+              placeholder="admin123"
             />
           </div>
 

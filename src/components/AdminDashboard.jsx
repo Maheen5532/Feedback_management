@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 
 function AdminDashboard({ onLogout }) {
@@ -12,11 +13,14 @@ function AdminDashboard({ onLogout }) {
   const fetchFeedbacks = async () => {
     try {
       const token = localStorage.getItem("adminToken");
-      const response = await fetch("http://localhost:5000/admin/feedbacks", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://feedback-server-seven.vercel.app/admin/feedbacks",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -37,7 +41,7 @@ function AdminDashboard({ onLogout }) {
     try {
       const token = localStorage.getItem("adminToken");
       const response = await fetch(
-        `http://localhost:5000/admin/feedbacks/${id}`,
+        `https://feedback-server-seven.vercel.app/admin/feedbacks/${id}`,
         {
           method: "DELETE",
           headers: {

@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function FeedbackForm({ onSuccess }) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    course: '',
-    rating: '',
-    comments: ''
+    name: "",
+    email: "",
+    course: "",
+    rating: "",
+    comments: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -22,28 +22,31 @@ function FeedbackForm({ onSuccess }) {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:5000/feedback', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://feedback-server-seven.vercel.app/feedback",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         onSuccess();
         setFormData({
-          name: '',
-          email: '',
-          course: '',
-          rating: '',
-          comments: ''
+          name: "",
+          email: "",
+          course: "",
+          rating: "",
+          comments: "",
         });
       } else {
-        alert('Error submitting feedback. Please try again.');
+        alert("Error submitting feedback. Please try again.");
       }
     } catch (error) {
-      alert('Error submitting feedback. Please try again.');
+      alert("Error submitting feedback. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -52,8 +55,10 @@ function FeedbackForm({ onSuccess }) {
   return (
     <div className="max-w-2xl mx-auto">
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Submit Your Feedback</h2>
-        
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+          Submit Your Feedback
+        </h2>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -140,7 +145,7 @@ function FeedbackForm({ onSuccess }) {
             disabled={isSubmitting}
             className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
           >
-            {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
+            {isSubmitting ? "Submitting..." : "Submit Feedback"}
           </button>
         </form>
       </div>
