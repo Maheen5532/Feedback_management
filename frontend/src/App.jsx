@@ -10,16 +10,16 @@ import FeedbackForm from "./components/FeedbackForm";
 import AdminLogin from "./components/AdminLogin";
 import AdminDashboard from "./components/AdminDashboard";
 import ThankYou from "./components/ThankYou";
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("adminToken")
   );
 
-  // Navigation bar as a component
-  const NavBar = () => {
+  // Wrapper to use navigate outside of NavBar
+  const MainRoutes = () => {
     const navigate = useNavigate();
-    return (
+    // Updated NavBar to use navigate
+    const NavBar = () => (
       <nav className="bg-white shadow-sm border-b">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
@@ -66,25 +66,19 @@ function App() {
         </div>
       </nav>
     );
-  };
 
-  return (
-    <Router>
-      <div className="min-h-screen bg-gray-50">
+    return (
+      <>
         <NavBar />
         <main className="max-w-4xl mx-auto px-4 py-8">
           <Routes>
             <Route
               path="/"
-              element={
-                <FeedbackForm
-                  onSuccess={() => window.location.replace("/thankyou")}
-                />
-              }
+              element={<FeedbackForm onSuccess={() => navigate("/thankyou")} />}
             />
             <Route
               path="/thankyou"
-              element={<ThankYou onBack={() => window.location.replace("/")} />}
+              element={<ThankYou onBack={() => navigate("/")} />}
             />
             <Route
               path="/admin/login"
@@ -92,7 +86,7 @@ function App() {
                 <AdminLogin
                   onLogin={() => {
                     setIsLoggedIn(true);
-                    window.location.replace("/admin/dashboard");
+                    navigate("/admin/dashboard");
                   }}
                 />
               }
@@ -105,7 +99,7 @@ function App() {
                     onLogout={() => {
                       setIsLoggedIn(false);
                       localStorage.removeItem("adminToken");
-                      window.location.replace("/");
+                      navigate("/");
                     }}
                   />
                 ) : (
@@ -115,17 +109,18 @@ function App() {
             />
             <Route
               path="*"
-              element={
-                <FeedbackForm
-                  onSuccess={() => window.location.replace("/thankyou")}
-                />
-              }
+              element={<FeedbackForm onSuccess={() => navigate("/thankyou")} />}
             />
           </Routes>
         </main>
-      </div>
+      </>
+    );
+  };
+
+  return (
+    <Router>
+      <MainRoutes />
     </Router>
   );
 }
-
 export default App;
