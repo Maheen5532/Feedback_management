@@ -14,7 +14,7 @@ function AdminDashboard({ onLogout }) {
     try {
       const token = localStorage.getItem("adminToken");
       const response = await fetch(
-        "https://feedback-server-seven.vercel.app/admin/feedbacks",
+        "https://feedback-management-cnu7.vercel.app/admin/feedbacks",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ function AdminDashboard({ onLogout }) {
     try {
       const token = localStorage.getItem("adminToken");
       const response = await fetch(
-        `https://feedback-server-seven.vercel.app/admin/feedbacks/${id}`,
+        `https://feedback-management-cnu7.vercel.app/admin/feedbacks/${id}`,
         {
           method: "DELETE",
           headers: {

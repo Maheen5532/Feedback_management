@@ -23,7 +23,7 @@ function FeedbackForm({ onSuccess }) {
 
     try {
       const response = await fetch(
-        "https://feedback-server-seven.vercel.app/feedback",
+        "https://feedback-management-cnu7.vercel.app/feedback",
         {
           method: "POST",
           headers: {

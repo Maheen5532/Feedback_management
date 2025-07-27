@@ -21,7 +21,7 @@ function AdminLogin({ onLogin }) {
 
     try {
       const response = await fetch(
-        "https://feedback-server-seven.vercel.app/admin/login",
+        "https://feedback-management-cnu7.vercel.app/admin/login",
         {
           method: "POST",
           headers: {
