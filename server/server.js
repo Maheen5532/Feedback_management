@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 app.use(cors({
-  origin: "https://feedback-management-smit.vercel.app",
+  origin: "https://feedback-management-frontend-theta.vercel.app",
   credentials : true
 }));
 app.use(express.json());
